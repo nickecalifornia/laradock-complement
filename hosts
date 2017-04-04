@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# copy from https://gist.github.com/irazasyed/a7b0a079e7727a4315b9
+# based from https://gist.github.com/irazasyed/a7b0a079e7727a4315b9 and https://gist.github.com/bzerangue/4393408
 
 # PATH TO YOUR HOSTS FILE
 ETC_HOSTS=/etc/hosts
