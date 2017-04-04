@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+BASEDIR=$(dirname "$0")
+SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+function create_configuration () {
+    block="server {
+
+        listen 80;
+        listen [::]:80;
+        
+        server_name $2;
+        root /var/www/$3/public;
+
+        index index.php index.html index.htm;
+
+        location / {
+             try_files \$uri \$uri/ /index.php\$is_args\$args;
+        }
+
+        location ~ \.php$ {
+            try_files \$uri /index.php =404;
+            fastcgi_pass php-upstream;
+            fastcgi_index index.php;
+            fastcgi_buffers 16 16k; 
+            fastcgi_buffer_size 32k;
+            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            include fastcgi_params;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+        
+        location /.well-known/acme-challenge/ {
+            root /var/www/letsencrypt/;
+            log_not_found off;
+        }
+    }
+    "
+}
+
+function write_configuration_file() 
+{
+    echo -e "$block" > ".../$BASEDIR/nginx/sites/$2.conf"    
+}
+
+echo "#######################################"
+echo "#  NGINX Configuration Files Manager  #"
+echo "#######################################"
+
+case "$1" in
+      -a|--add|add)
+        echo -e "- Adding New File Configuration \n"
+        add
+        ;;
+    -r|--remove|remove)
+        echo -e "- Removing New File Configuration \n"
+        remove
+        ;;
+
+    *)
+        echo $SCRIPT_FILENAME
+        echo "Usage: "
+        echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [ip]"
+        echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [ip]"
+        echo 
+        echo 
+        echo "Examples:"
+        echo -e "$SCRIPT_FILENAME add project.dev project"
+        echo -e "$SCRIPT_FILENAME remove project.dev project"
+        exit 1
+        ;;
+esac
+
+exit 0

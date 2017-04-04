@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+echo "##########################################"
+echo "#  Laradock NGINX Project Configurator   #"
+echo "##########################################"
+
+function add ()
+{
+	sh laradock-complements-scripts/./hosts-manager add $2 $3 $4
+	sh laradock-complements-scripts/./server-configurator add $2 $3
+	sh laradock-complements-scripts/./nginx-image-restarter
+}
+
+function remove ()
+{
+	sh laradock-complements-scripts/./hosts-manager remove $2 $3 $4
+	sh laradock-complements-scripts/./server-configurator remove $2 $3
+	sh laradock-complements-scripts/./nginx-image-restarter
+}
+
+function configure()
+{
+	sudo chmod +x laradock-complements-scripts/hosts-manager laradock-complements-scripts/nginx-image-restarter laradock-complements-scripts/server-configurator
+}
+
+case "$1" in
+    -a|--add|add)
+        echo -e "- Create New NGINX Configuration \n"
+        add
+        ;;
+    -r|--remove|remove)
+        echo -e "- Removing NGINX Configuration \n"
+        remove
+        ;;
+    -c|--configure|configure)
+        echo -e "- Making Scripts Executable \n"
+        configure
+        ;;
+
+    *)
+        echo $SCRIPT_FILENAME
+        echo "Usage: "
+        echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [project-folder] [ip]"
+        echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [project-folder] [ip]"
+        echo -e "$SCRIPT_FILENAME [-c|--configure|configure]  -Make Scripts Executable"
+        echo 
+        echo 
+        echo "Examples:"
+        echo "Ip defaults to 127.0.0.1"
+        echo -e "$SCRIPT_FILENAME add project.dev project"
+        echo -e "$SCRIPT_FILENAME remove project.dev project"
+        exit 1
+        ;;
+esac
+
+exit 0

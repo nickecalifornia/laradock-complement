@@ -2,6 +2,8 @@
 
 # based from https://gist.github.com/irazasyed/a7b0a079e7727a4315b9 and https://gist.github.com/bzerangue/4393408
 
+SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
 # PATH TO YOUR HOSTS FILE
 ETC_HOSTS=/etc/hosts
 
@@ -11,7 +13,8 @@ IP="127.0.0.1"
 # Hostname to add/remove.
 HOSTNAME=$2
 
-remove() {
+function remove()
+{
     if [ -n "$(grep $HOSTNAME /etc/hosts)" ]
     then
         echo -e "$HOSTNAME Found in your $ETC_HOSTS, Removing now...";
@@ -21,7 +24,8 @@ remove() {
     fi
 }
 
-add() {
+function add()
+{
     HOSTS_LINE="$IP\t$HOSTNAME"
     if [ -n "$(grep $HOSTNAME /etc/hosts)" ]
         then
@@ -39,23 +43,29 @@ add() {
     fi
 }
 
+echo "#################################"
+echo "#  Hosts Configuration Manager  #"
+echo "#################################"
 
 case "$1" in
-  add)
+    -a|--add|add)
+        echo -e "- Adding New Entry in $ETC_HOSTS \n"
         add
         ;;
-  remove)
+    -r|--remove|remove)
+        echo -e "- Removing Entry in $ETC_HOSTS \n"
         remove
         ;;
 
-  *)
+    *)
         echo "Usage: "
-        echo "hosts [add|remove] [hostname] [ip]"
+        echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [ip]"
+        echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [ip]"
         echo 
         echo "Ip defaults to 127.0.0.1"
         echo "Examples:"
-        echo "hosts.sh add testing.com"
-        echo "hosts.sh remove testing.com 192.168.1.1"
+        echo -e "$SCRIPT_FILENAME add project.dev"
+        echo -e "$SCRIPT_FILENAME remove project.dev"
         exit 1
         ;;
 esac
