@@ -1,6 +1,6 @@
 #!/bin/bash
 SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
-SCRIPT_FOLDER="laradock-complements-scritps"
+SCRIPT_FOLDER="laradock-complement-scritps"
 SCRIPT_PATH=$(dirname $0)
 HOSTNAME=$2
 PROJECT_FOLDER=$3
