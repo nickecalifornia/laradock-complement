@@ -1,4 +1,4 @@
-## Laradock Nginx Complements
+## Laradock Nginx Complement
 
 More speed in setting up laravel projects with nginx!
 
@@ -68,4 +68,4 @@ Description
 
 ## License
 
-The Laradock Nginx Complements is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Laradock Nginx Complement is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
