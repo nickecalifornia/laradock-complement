@@ -7,9 +7,11 @@ PROJECT_FOLDER=$3
 IP=$4
 
 echo
-echo "##########################################"
-echo "#  Laradock NGINX Project Configurator   #"
-echo "##########################################"
+echo "#########################################"
+echo "#         Laradock Complement           #"
+echo "#     NGINX Project Configurator        #"
+echo "#  @https://github.com/nickecalifornia  #"
+echo "#########################################"
 echo
 
 function add ()
