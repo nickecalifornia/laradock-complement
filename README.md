@@ -26,7 +26,8 @@ Obs. "lc" can be replaced with your preferred folder
 
 
 
-##Setup Permissions
+## Setup Permissions
+
 So we need to add execute permission to the ./configure script:
 ```
 sudo chmod +x lc/configure
@@ -98,7 +99,7 @@ Description
 
 
 
-##Common Problems
+## Common Problems
 
 After updating the sub modules, you must re-run the permission commands (for execution) to enable.
 
