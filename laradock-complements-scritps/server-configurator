@@ -51,6 +51,14 @@ function create_configuration () {
 
 function write_configuration_file() 
 {
+    if [ -f $file_path ]; then
+        echo -e "- Updating File Configuration"
+    else
+        echo -e "- Adding New File Configuration"
+    fi
+
+    echo -e "$file_path"
+
     echo "$block" > "$file_path" 
 
     if [ ! -f $file_path ]; then
@@ -80,7 +88,6 @@ echo "#######################################"
 
 case "$1" in
       -a|--add|add)
-        echo -e "- Adding New File Configuration \n"
         create_configuration
         write_configuration_file
         ;;
