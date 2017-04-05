@@ -33,14 +33,19 @@ lc/configure -c
 
 ## Usage
 
-Add a new project
+Add a new project:
 ```
 lc/configure -a starter.dev starterfolder 
 ```
 
-Remove a project
+Remove a project:
 ```
 lc/configure -r starter.dev starterfolder 
+```
+
+List all configured projects
+```
+lc/configure -l
 ```
 
 
