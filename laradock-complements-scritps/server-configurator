@@ -4,7 +4,7 @@ BASEDIR=$(dirname "$0")
 SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 HOSTNAME=$2
 FOLDER_PATH=$3
-file_path="nginx/sites/$HOSTNAME.conf"
+file_path="../nginx/sites/$HOSTNAME.conf"
 
 
 function create_configuration () {

@@ -7,4 +7,4 @@ echo "#####################################"
 
 
 echo -e "Restarting Laradock NGINX image"
-docker-compose restart nginx
+cd .. && docker-compose restart nginx
