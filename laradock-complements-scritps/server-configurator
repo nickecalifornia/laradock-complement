@@ -120,6 +120,7 @@ case "$1" in
         echo "Usage: "
         echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [ip]"
         echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [ip]"
+        echo -e "$SCRIPT_FILENAME [-l|--list|list] [-Show All Conf Files"
         echo 
         echo 
         echo "Examples:"

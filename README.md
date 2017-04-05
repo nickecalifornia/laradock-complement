@@ -67,6 +67,7 @@ Description
  lc/configure [-a|--add|add] [hostname] [project-folder] [ip]
  lc/configure [-r|--remove|remove] [hostname] [project-folder] [ip]
  lc/configure [-c|--configure|configure]  -Make Scripts Executable
+ lc/configure [-l|--list|list]  -Show all NGINX configured hosts
  
  
  Examples:

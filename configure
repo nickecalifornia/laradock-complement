@@ -5,11 +5,12 @@ SCRIPT_PATH=$(dirname $0)
 HOSTNAME=$2
 PROJECT_FOLDER=$3
 IP=$4
+
 echo
 echo "##########################################"
 echo "#  Laradock NGINX Project Configurator   #"
 echo "##########################################"
-
+echo
 
 function add ()
 {
@@ -61,7 +62,7 @@ case "$1" in
         exit 1
         ;;
     -l|--list|list)
-        echo -e "- Hosts List in NGINX"
+        echo -e "- Hosts List Configured in NGINX"
         list
         exit 1
         ;;
@@ -72,6 +73,7 @@ case "$1" in
         echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [project-folder] [ip]"
         echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [project-folder] [ip]"
         echo -e "$SCRIPT_FILENAME [-c|--configure|configure]  -Make Scripts Executable"
+        echo -e "$SCRIPT_FILENAME [-l|--list|list]  -Show all NGINX configured hosts"
         echo 
         echo 
         echo "Examples:"
