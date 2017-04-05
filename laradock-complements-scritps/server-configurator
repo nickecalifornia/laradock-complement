@@ -1,6 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
 BASEDIR=$(dirname "$0")
+
 SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+HOSTNAME=$2
+FOLDER_PATH=$3
+file_path="nginx/sites/$HOSTNAME.conf"
+
 
 function create_configuration () {
     block="server {
@@ -8,8 +13,8 @@ function create_configuration () {
         listen 80;
         listen [::]:80;
         
-        server_name $2;
-        root /var/www/$3/public;
+        server_name $HOSTNAME;
+        root /var/www/$FOLDER_PATH/public;
 
         index index.php index.html index.htm;
 
@@ -41,9 +46,29 @@ function create_configuration () {
 
 function write_configuration_file() 
 {
-    echo -e "$block" > ".../$BASEDIR/nginx/sites/$2.conf"    
+    echo "$block" > "$file_path" 
+
+    if [ ! -f $file_path ]; then
+        echo -e "- Erro on Writing File $file_path"
+    else
+        echo -e "- Done"
+    fi
 }
 
+function remove()
+{
+
+    if [ ! -f $file_path ]; then
+        echo -e "- File $file_path not found"
+    else
+        echo -e "- Removing $file_path"
+        rm $file_path
+        echo -e "- Done"
+    fi
+    
+}
+
+echo
 echo "#######################################"
 echo "#  NGINX Configuration Files Manager  #"
 echo "#######################################"
@@ -51,7 +76,8 @@ echo "#######################################"
 case "$1" in
       -a|--add|add)
         echo -e "- Adding New File Configuration \n"
-        add
+        create_configuration
+        write_configuration_file
         ;;
     -r|--remove|remove)
         echo -e "- Removing New File Configuration \n"
@@ -59,7 +85,6 @@ case "$1" in
         ;;
 
     *)
-        echo $SCRIPT_FILENAME
         echo "Usage: "
         echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [ip]"
         echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [ip]"
@@ -71,5 +96,3 @@ case "$1" in
         exit 1
         ;;
 esac
-
-exit 0

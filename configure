@@ -1,45 +1,53 @@
-#!/usr/bin/env bash
+#!/bin/bash
 SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
-
+SCRIPT_FOLDER="laradock-complements-scritps"
+HOSTNAME=$2
+PROJECT_FOLDER=$3
+IP=$4
+echo
 echo "##########################################"
 echo "#  Laradock NGINX Project Configurator   #"
 echo "##########################################"
 
 function add ()
 {
-	sh laradock-complements-scripts/./hosts-manager add $2 $3 $4
-	sh laradock-complements-scripts/./server-configurator add $2 $3
-	sh laradock-complements-scripts/./nginx-image-restarter
+	sh $SCRIPT_FOLDER/./hosts-manager add $HOSTNAME $PROJECT_FOLDER $IP
+	sh $SCRIPT_FOLDER/./server-configurator add $HOSTNAME $PROJECT_FOLDER
+	sh $SCRIPT_FOLDER/./nginx-image-restarter
 }
 
 function remove ()
 {
-	sh laradock-complements-scripts/./hosts-manager remove $2 $3 $4
-	sh laradock-complements-scripts/./server-configurator remove $2 $3
-	sh laradock-complements-scripts/./nginx-image-restarter
+	sh $SCRIPT_FOLDER/./hosts-manager remove $HOSTNAME $PROJECT_FOLDER $IP
+	sh $SCRIPT_FOLDER/./server-configurator remove $HOSTNAME $PROJECT_FOLDER
+	sh $SCRIPT_FOLDER/./nginx-image-restarter
 }
 
 function configure()
 {
-	sudo chmod +x laradock-complements-scripts/hosts-manager laradock-complements-scripts/nginx-image-restarter laradock-complements-scripts/server-configurator
+	sudo chmod +x $SCRIPT_FOLDER/hosts-manager $SCRIPT_FOLDER/nginx-image-restarter $SCRIPT_FOLDER/server-configurator
 }
 
 case "$1" in
     -a|--add|add)
         echo -e "- Create New NGINX Configuration \n"
         add
+        exit 1
         ;;
     -r|--remove|remove)
         echo -e "- Removing NGINX Configuration \n"
         remove
+        exit 1
         ;;
     -c|--configure|configure)
         echo -e "- Making Scripts Executable \n"
         configure
+        echo -e "- Done \n"
+        exit 1
         ;;
 
     *)
-        echo $SCRIPT_FILENAME
+     	echo
         echo "Usage: "
         echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [project-folder] [ip]"
         echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [project-folder] [ip]"
@@ -54,4 +62,4 @@ case "$1" in
         ;;
 esac
 
-exit 0
+exit 1

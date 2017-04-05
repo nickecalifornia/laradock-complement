@@ -1,5 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-echo -e "Restarting Laradock NGINX imager /n"
-cd .. && docker-compose restart nginx
-exit 0
+echo
+echo "#####################################"
+echo "#  Docker-Compose NGINX Restarting  #"
+echo "#####################################"
+
+
+echo -e "Restarting Laradock NGINX image"
+docker-compose restart nginx
