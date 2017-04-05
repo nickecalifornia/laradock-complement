@@ -37,7 +37,7 @@ Add a new project
 lc/configure -a starter.dev starterfolder 
 ```
 
-Remove a new project
+Remove a project
 ```
 lc/configure -r starter.dev starterfolder 
 ```
