@@ -4,12 +4,13 @@ BASEDIR=$(dirname "$0")
 SCRIPT_FILENAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 HOSTNAME=$2
 FOLDER_PATH=$3
+NGINX_SITES="../nginx/sites"
 
-if [ -d "../nginx/sites" ]; then
-  file_path="../nginx/sites/$HOSTNAME.conf"
-else
-    file_path="nginx/sites/$HOSTNAME.conf"
+if [ ! -d "$NGINX_SITES" ]; then
+    NGINX_SITES="nginx/sites"
 fi
+
+file_path="$NGINX_SITES/$HOSTNAME.conf"
 
 
 function create_configuration () {
@@ -81,22 +82,41 @@ function remove()
     
 }
 
-echo
-echo "#######################################"
-echo "#  NGINX Configuration Files Manager  #"
-echo "#######################################"
+function list()
+{
+    for file in $NGINX_SITES/*.conf; do
+        file=$(echo $file | sed -e 's/\.[^.]*$//')
+        file=${file#"nginx/sites/"}
+        file=${file#"../nginx/sites/"}
+        echo $file
+    done
+}
+
+function header()
+{
+    echo
+    echo "#######################################"
+    echo "#  NGINX Configuration Files Manager  #"
+    echo "#######################################"
+}
 
 case "$1" in
       -a|--add|add)
+        header
         create_configuration
         write_configuration_file
         ;;
     -r|--remove|remove)
+        header
         echo -e "- Removing New File Configuration \n"
         remove
         ;;
+    -l|--list|list)
+        list
+        ;;
 
     *)
+        header
         echo "Usage: "
         echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [ip]"
         echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [ip]"

@@ -43,22 +43,36 @@ function add()
     fi
 }
 
-echo
-echo "#################################"
-echo "#  Hosts Configuration Manager  #"
-echo "#################################"
+function list()
+{
+    echo $(cat "$ETC_HOSTS")
+}
+
+function header()
+{
+    echo
+    echo "#################################"
+    echo "#  Hosts Configuration Manager  #"
+    echo "#################################"
+}
 
 case "$1" in
     -a|--add|add)
+        header
         echo -e "- Adding New Entry in $ETC_HOSTS \n"
         add
         ;;
     -r|--remove|remove)
+        header
         echo -e "- Removing Entry in $ETC_HOSTS \n"
         remove
         ;;
+    -l|--list|list)
+        list
+        ;;
 
     *)
+        header
         echo "Usage: "
         echo -e "$SCRIPT_FILENAME [-a|--add|add] [hostname] [ip]"
         echo -e "$SCRIPT_FILENAME [-r|--remove|remove] [hostname] [ip]"

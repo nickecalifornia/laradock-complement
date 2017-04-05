@@ -31,6 +31,19 @@ function configure()
     echo -e "- Done \n"
 }
 
+function list()
+{
+    hosts=$(sh $SCRIPT_PATH/$SCRIPT_FOLDER/./hosts-manager list)
+    configs=$(sh $SCRIPT_PATH/$SCRIPT_FOLDER/./server-configurator list)
+
+    printf '%s\n' "$configs" | while IFS= read -r host_item
+    do
+        if [[ $hosts == *"$host_item"* ]]; then
+           echo "  - $host_item"
+        fi
+    done
+}
+
 case "$1" in
     -a|--add|add)
         echo -e "- Create New NGINX Configuration \n"
@@ -45,6 +58,11 @@ case "$1" in
     -c|--configure|configure)
         echo -e "- Making Scripts Executable \n"
         configure
+        exit 1
+        ;;
+    -l|--list|list)
+        echo -e "- Hosts List in NGINX"
+        list
         exit 1
         ;;
 
