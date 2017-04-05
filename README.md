@@ -1,15 +1,20 @@
 ## Laradock Nginx Complement
 
-More speed in setting up laravel projects with nginx!
+**More speed in setting up laravel projects with nginx!**
 
-A git submodule to be used together with [laradock-nginx](https://github.com/laradock/laradock). Facilitates the configuration of projects in a multi-project environment.
+A git submodule to be used together with [laradock-nginx](https://github.com/laradock/laradock). Facilitates the configuration of projects (/etc/hosts and /nginx/sites/*.conf) in a **multi-project** environment.
+
 
 
 ## Requirements
+
+- Docker-Compose
 - Laradock with nginx-image
 
 
+
 ## Install
+
 This module was intended to be used as multiprojects after cloning the laradock into its preferred folder.
 
 Run:
@@ -19,6 +24,9 @@ git submodule add https://github.com/nickecalifornia/laradock-complement.git lc
 ```
 Obs. "lc" can be replaced with your preferred folder
 
+
+
+##Setup Permissions
 So we need to add execute permission to the ./configure script:
 ```
 sudo chmod +x lc/configure
@@ -33,20 +41,26 @@ lc/configure -c
 
 ## Usage
 
-Add a new project:
+**Add a new project:**
 ```
-lc/configure -a starter.dev starterfolder 
-```
-
-Remove a project:
-```
-lc/configure -r starter.dev starterfolder 
+lc/configure -a starter.dev starterProjectFolder 
 ```
 
-List all configured projects
+Test the new project in your browser
+```
+ http://starter.dev
+```
+
+**Remove a project:**
+```
+lc/configure -r starter.dev starterProjectFolder 
+```
+
+**List all configured projects**
 ```
 lc/configure -l
 ```
+
 
 
 ## Update Submodule
@@ -55,6 +69,7 @@ In Laradock folder run:
 ```
 git submodule update --remote --recursive
 ```
+
 
 
 ## Help Options
@@ -82,6 +97,19 @@ Description
 
 
 
+
+##Common Problems
+
+After updating the sub modules, you must re-run the permission commands (for execution) to enable.
+
+
+
+## Contributions
+
+If it is useful to you and has suggestions and corrections, help me to improve the project, thank you for all the contributions.
+
+
+
 ## License
 
-The Laradock Nginx Complement is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The **Laradock Nginx Complement** is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
