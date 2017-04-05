@@ -11,7 +11,6 @@ echo "#  Laradock NGINX Project Configurator   #"
 echo "##########################################"
 
 
-echo $SCRIPT_PATH
 function add ()
 {
     if [ ! -f $SCRIPT_FOLDER/hosts-manager ]; then
@@ -33,7 +32,7 @@ function remove ()
 
 function configure()
 {
-	sudo chmod +x $SCRIPT_FOLDER/hosts-manager $SCRIPT_FOLDER/nginx-image-restarter $SCRIPT_FOLDER/server-configurator
+	sudo chmod +x $SCRIPT_PATH/$SCRIPT_FOLDER/hosts-manager $SCRIPT_PATH/$SCRIPT_FOLDER/nginx-image-restarter $SCRIPT_PATH/$SCRIPT_FOLDER/server-configurator
 }
 
 case "$1" in
