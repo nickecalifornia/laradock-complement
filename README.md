@@ -30,6 +30,7 @@ lc/configure -c
 ```
 
 
+
 ## Usage
 
 Add a new project
@@ -41,6 +42,15 @@ Remove a project
 ```
 lc/configure -r starter.dev starterfolder 
 ```
+
+
+## Update Submodule
+
+In Laradock folder run:
+```
+git submodule update --remote --recursive
+```
+
 
 ## Help Options
 
