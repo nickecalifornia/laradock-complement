@@ -22,7 +22,7 @@ Run:
 git submodule init
 git submodule add https://github.com/nickecalifornia/laradock-complement.git lc
 ```
-Obs. "lc" can be replaced with your preferred folder
+**Obs.:** *"lc" can be replaced with your preferred folder*
 
 
 
