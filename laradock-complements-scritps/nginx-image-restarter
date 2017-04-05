@@ -13,3 +13,5 @@ if [ -f $FILE ]; then
 else
    cd .. && docker-compose restart nginx
 fi
+
+exit 0
