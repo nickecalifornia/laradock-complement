@@ -7,4 +7,9 @@ echo "#####################################"
 
 
 echo -e "Restarting Laradock NGINX image"
-cd .. && docker-compose restart nginx
+FILE="docker-compose.yml"    
+if [ -f $FILE ]; then
+   docker-compose restart nginx
+else
+   cd .. && docker-compose restart nginx
+fi
