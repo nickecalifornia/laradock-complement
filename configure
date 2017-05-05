@@ -21,6 +21,13 @@ function add ()
 	sh $SCRIPT_PATH/$SCRIPT_FOLDER/./nginx-image-restarter
 }
 
+function add_no_public ()
+{
+    sh $SCRIPT_PATH/$SCRIPT_FOLDER/./hosts-manager add $HOSTNAME $PROJECT_FOLDER $IP
+    sh $SCRIPT_PATH/$SCRIPT_FOLDER/./server-configurator add-no-public $HOSTNAME $PROJECT_FOLDER
+    sh $SCRIPT_PATH/$SCRIPT_FOLDER/./nginx-image-restarter
+}
+
 function remove ()
 {
 	sh $SCRIPT_PATH/$SCRIPT_FOLDER/./hosts-manager remove $HOSTNAME $PROJECT_FOLDER $IP
@@ -48,6 +55,12 @@ function list()
 }
 
 case "$1" in
+    -anp|--add-no-public|add-no-public)
+        echo -e "- Create New NGINX Configuration \n"
+        echo -e "- Without Public Folder \n"
+        add_no_public
+        exit 1
+        ;;
     -a|--add|add)
         echo -e "- Create New NGINX Configuration \n"
         add

@@ -47,6 +47,11 @@ lc/configure -c
 lc/configure -a starter.dev starterProjectFolder 
 ```
 
+**Add a new project without "Public" Folder:**
+```
+lc/configure -anp starter.dev starterProjectFolder 
+```
+
 Test the new project in your browser
 ```
  http://starter.dev
@@ -86,6 +91,7 @@ Description
  - Obs.: Ip defaults to 127.0.0.1
 
  lc/configure [-a|--add|add] [hostname] [project-folder] [ip]
+ lc/configure [-anp|--add-no-public|add-no-public] [hostname] [project-folder] [ip]
  lc/configure [-r|--remove|remove] [hostname] [project-folder] [ip]
  lc/configure [-c|--configure|configure]  -Make Scripts Executable
  lc/configure [-l|--list|list]  -Show all NGINX configured hosts
