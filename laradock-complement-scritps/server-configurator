@@ -18,7 +18,7 @@ function create_configuration () {
     root_path="root /var/www/$FOLDER_PATH/public;"
 
     if [[ "$NO_PUBLIC" -eq "true" ]] ; then
-        root_path="root /var/www/$FOLDER_PATH"
+        root_path="root /var/www/$FOLDER_PATH";
     fi
     block="server {
 
